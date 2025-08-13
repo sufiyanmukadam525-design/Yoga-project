@@ -1,0 +1,192 @@
+{% extends 'yogaapp/base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block main %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4fbf8;
+      color: #2c3e50;
+    }
+
+    .dashboard-container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #ffffff;
+      padding: 20px;
+      border-right: 1px solid #eaeaea;
+    }
+
+    .sidebar-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 3px solid #2ecc71;
+    }
+
+    .username {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #2c3e50;
+    }
+
+    .sidebar-menu h4 {
+      margin-top: 24px;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #7f8c8d;
+    }
+
+    .sidebar-menu ul {
+      list-style: none;
+    }
+
+    .sidebar-menu ul li {
+      margin-bottom: 12px;
+      cursor: pointer;
+      color: #34495e;
+      transition: 0.3s;
+    }
+
+    .sidebar-menu ul li:hover {
+      color: #2ecc71;
+    }
+
+    .main-area {
+      flex-grow: 1;
+      padding: 30px;
+    }
+
+    .main-header h2 {
+      font-size: 28px;
+      color: #2c3e50;
+    }
+
+    .quote {
+      font-size: 14px;
+      color: #7f8c8d;
+      margin-top: 6px;
+    }
+
+    .dashboard-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .card {
+      background-color: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+
+    .card h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #34495e;
+    }
+
+    .card p {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2ecc71;
+    }
+
+    .logout-btn {
+      display: inline-block;
+      margin-top: 30px;
+      background-color: #e74c3c;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .logout-btn:hover {
+      background-color: #c0392b;
+    }
+  </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+
+  <aside class="sidebar">
+    <div class="profile-section">
+      <img src="https://i.ibb.co/yqJZ4fd/default-user.png" alt="User" class="sidebar-avatar" />
+      <h3 class="username">{{ first_name }}</h3>
+    </div>
+
+    <nav class="sidebar-menu">
+      <h4>Profile</h4>
+      <ul>
+        <li>Dashboard</li>
+        <li>My Sessions</li>
+        <li>Progress</li>
+        <li>Reminders</li>
+      </ul>
+
+      <h4>TOOLS</h4>
+      <ul>
+        <li>Yoga Library</li>
+        <li>Meditation</li>
+        <li>Nutrition</li>
+      </ul>
+
+      <h4>ACCOUNT</h4>
+      <ul>
+        <li>Settings</li>
+        <li><a href="{% url 'logout' %}" class="logout-btn">Logout</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main-area">
+    <header class="main-header">
+      <h2>Welcome back, {{ first_name }} 🌿</h2>
+      <p class="quote">"Balance your body. Calm your mind."</p>
+    </header>
+
+    <div class="dashboard-cards">
+      <div class="card">
+        <h3>🧘‍♂️ Yoga Sessions</h3>
+        <p>{{ sessions_completed }}</p>
+      </div>
+      <div class="card">
+        <h3>🔥 Calories Burned</h3>
+        <p>{{ calories_burned }} kcal</p>
+      </div>
+      <div class="card">
+        <h3>🧘 Courses Enrolled</h3>
+        <p>{{ courses_enrolled }} Active</p>
+      </div>
+      <div class="card">
+        <h3>🕒 Meditation Time</h3>
+        <p>{{ meditation_time }}</p>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+</body>
+</html>
+
+{% endblock %}

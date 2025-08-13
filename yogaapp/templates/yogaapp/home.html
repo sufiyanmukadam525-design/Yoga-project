@@ -1,192 +1,129 @@
 {% extends 'yogaapp/base.html' %}
 {% block title %}Dashboard{% endblock %}
 
-{% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+{% block main %}
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #f0f9f8, #e0f3ea);
+  }
+  .welcome {
+    text-align: center;
+    padding: 60px 20px;
+  }
+  .welcome h1 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+  .welcome p {
+    font-size: 16px;
+    color: #34495e;
+    margin-bottom: 30px;
+  }
+  .stats-section {
+    padding: 40px 20px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+    margin-bottom: 40px;
+  }
+  .stat-card {
+    padding: 20px;
+    border-radius: 16px;
+    background: #f9fffc;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  .stat-card:hover {
+    transform: translateY(-5px);
+  }
+  .stat-card h3 {
+    color: #2ecc71;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .features {
+    background-color: white;
+    padding: 50px 20px;
+    text-align: center;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  }
+  .feature-card {
+    padding: 20px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+  }
+  .feature-card:hover {
+    transform: translateY(-5px);
+  }
+  .feature-card h4 {
+    color: #2ecc71;
+    margin-top: 15px;
+  }
+</style>
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4fbf8;
-      color: #2c3e50;
-    }
+<!-- Welcome Section -->
+<section class="welcome">
+  <h1>Welcome back, {{ user.username }} 👋</h1>
+  <p>Continue your journey towards a healthier mind and body. Here’s your progress so far.</p>
+  <a href="#" class="btn btn-success">Start New Session</a>
+</section>
 
-    .dashboard-container {
-      display: flex;
-      height: 100vh;
-    }
-
-    .sidebar {
-      width: 250px;
-      background-color: #ffffff;
-      padding: 20px;
-      border-right: 1px solid #eaeaea;
-    }
-
-    .sidebar-avatar {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      border: 3px solid #2ecc71;
-    }
-
-    .username {
-      margin-top: 10px;
-      font-size: 18px;
-      color: #2c3e50;
-    }
-
-    .sidebar-menu h4 {
-      margin-top: 24px;
-      margin-bottom: 8px;
-      font-size: 14px;
-      color: #7f8c8d;
-    }
-
-    .sidebar-menu ul {
-      list-style: none;
-    }
-
-    .sidebar-menu ul li {
-      margin-bottom: 12px;
-      cursor: pointer;
-      color: #34495e;
-      transition: 0.3s;
-    }
-
-    .sidebar-menu ul li:hover {
-      color: #2ecc71;
-    }
-
-    .main-area {
-      flex-grow: 1;
-      padding: 30px;
-    }
-
-    .main-header h2 {
-      font-size: 28px;
-      color: #2c3e50;
-    }
-
-    .quote {
-      font-size: 14px;
-      color: #7f8c8d;
-      margin-top: 6px;
-    }
-
-    .dashboard-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
-
-    .card {
-      background-color: white;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
-      text-align: center;
-    }
-
-    .card h3 {
-      font-size: 16px;
-      margin-bottom: 10px;
-      color: #34495e;
-    }
-
-    .card p {
-      font-size: 24px;
-      font-weight: bold;
-      color: #2ecc71;
-    }
-
-    .logout-btn {
-      display: inline-block;
-      margin-top: 30px;
-      background-color: #e74c3c;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .logout-btn:hover {
-      background-color: #c0392b;
-    }
-  </style>
-</head>
-<body>
-
-<div class="dashboard-container">
-
-  <aside class="sidebar">
-    <div class="profile-section">
-      <img src="https://i.ibb.co/yqJZ4fd/default-user.png" alt="User" class="sidebar-avatar" />
-      <h3 class="username">{{ first_name }}</h3>
-    </div>
-
-    <nav class="sidebar-menu">
-      <h4>Profile</h4>
-      <ul>
-        <li>Dashboard</li>
-        <li>My Sessions</li>
-        <li>Progress</li>
-        <li>Reminders</li>
-      </ul>
-
-      <h4>TOOLS</h4>
-      <ul>
-        <li>Yoga Library</li>
-        <li>Meditation</li>
-        <li>Nutrition</li>
-      </ul>
-
-      <h4>ACCOUNT</h4>
-      <ul>
-        <li>Settings</li>
-        <li><a href="{% url 'logout' %}" class="logout-btn">Logout</a></li>
-      </ul>
-    </nav>
-  </aside>
-
-  <main class="main-area">
-    <header class="main-header">
-      <h2>Welcome back, {{ first_name }} 🌿</h2>
-      <p class="quote">"Balance your body. Calm your mind."</p>
-    </header>
-
-    <div class="dashboard-cards">
-      <div class="card">
-        <h3>🧘‍♂️ Yoga Sessions</h3>
-        <p>{{ sessions_completed }}</p>
-      </div>
-      <div class="card">
-        <h3>🔥 Calories Burned</h3>
-        <p>{{ calories_burned }} kcal</p>
-      </div>
-      <div class="card">
-        <h3>🧘 Courses Enrolled</h3>
-        <p>{{ courses_enrolled }} Active</p>
-      </div>
-      <div class="card">
-        <h3>🕒 Meditation Time</h3>
-        <p>{{ meditation_time }}</p>
+<!-- Stats -->
+<div class="container stats-section">
+  <div class="row g-4 text-center">
+    <div class="col-md-4">
+      <div class="stat-card">
+        <h3>15</h3>
+        <p>Sessions Completed</p>
       </div>
     </div>
-  </main>
-
+    <div class="col-md-4">
+      <div class="stat-card">
+        <h3>8 hrs</h3>
+        <p>Total Practice Time</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card">
+        <h3>92%</h3>
+        <p>Goal Progress</p>
+      </div>
+    </div>
+  </div>
 </div>
 
-</body>
-</html>
+<!-- Features Section -->
+<section class="container features mt-4">
+  <h2>Explore Your Dashboard</h2>
+  <div class="row g-4 justify-content-center mt-4">
+    <div class="col-md-3">
+      <div class="feature-card">
+        <img src="https://img.icons8.com/ios-filled/50/2ecc71/calendar.png" alt="Plans">
+        <h4>Your Plans</h4>
+        <p>View and manage your personalized yoga routines.</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="feature-card">
+        <img src="https://img.icons8.com/ios-filled/50/2ecc71/combo-chart.png" alt="Progress">
+        <h4>Progress Tracker</h4>
+        <p>Track your daily yoga and meditation achievements.</p>
+      </div>
+    </div>
+   <div class="col-md-3">
+  <div class="feature-card">
+    <img src="https://img.icons8.com/ios-filled/50/2ecc71/conference.png" alt="Community">
+    <h4>Community</h4>
+    <p>Connect with other yogis and share your journey.</p>
+  </div>
+</div>
 
+  </div>
+</section>
 {% endblock %}

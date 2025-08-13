@@ -1,0 +1,114 @@
+{% extends 'yogaapp/base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block main %}
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #f0f9f8, #e0f3ea);
+  }
+  .hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+  }
+  .hero-text {
+    flex: 1 1 400px;
+    padding: 20px;
+  }
+  .hero-text h1 {
+    font-size: 42px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+  .hero-text p {
+    font-size: 16px;
+    color: #34495e;
+    margin-bottom: 25px;
+  }
+  .hero-text .btn {
+    margin: 5px;
+    padding: 12px 24px;
+    border-radius: 8px;
+  }
+  .hero-image {
+    flex: 1 1 400px;
+    padding: 20px;
+  }
+  .hero-image img {
+    max-width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  }
+  .features {
+    background-color: white;
+    padding: 50px 20px;
+    text-align: center;
+  }
+  .features h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 30px;
+  }
+  .feature-card {
+    padding: 20px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+  }
+  .feature-card:hover {
+    transform: translateY(-5px);
+  }
+  .feature-card h4 {
+    color: #2ecc71;
+    margin-top: 15px;
+  }
+</style>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>Welcome to Serenity Yoga</h1>
+    <p>Your journey to a healthier mind and body starts here. Discover personalized yoga plans, track your progress, and connect with a mindful community.</p>
+    <a href="{% url 'signup' %}" class="btn btn-success">Get Started</a>
+    <a href="{% url 'login' %}" class="btn btn-outline-success">Login</a>
+  </div>
+  <div class="hero-image">
+    <img src="https://cdn.mos.cms.futurecdn.net/Q2UmKebkQdnWcT32Dg9LkV.jpg" alt="Yoga Pose" width="500px" height="">
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+  <h2>Why Choose Serenity Yoga?</h2>
+  <div class="row g-4 justify-content-center">
+    <div class="col-md-3">
+      <div class="feature-card">
+        <img src="https://img.icons8.com/ios-filled/50/2ecc71/lotus.png" alt="Icon">
+        <h4>Mindfulness</h4>
+        <p>Learn meditation techniques that help you stay calm and focused in daily life.</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="feature-card">
+        <img src="https://img.icons8.com/ios-filled/50/2ecc71/exercise.png" alt="Icon">
+        <h4>Flexibility</h4>
+        <p>Improve your posture and flexibility with guided yoga sessions for all levels.</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="feature-card">
+        <img src="https://img.icons8.com/ios-filled/50/2ecc71/heart-with-pulse.png" alt="Icon">
+        <h4>Wellness</h4>
+        <p>Boost your overall health with yoga plans tailored to your body and goals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
