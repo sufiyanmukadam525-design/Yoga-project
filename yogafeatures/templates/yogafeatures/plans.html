@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  .plans-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+  .plan-card { border: 1px solid #ccc; border-radius: 10px; width: 250px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: 0.3s; background: white; }
+  .plan-card:hover { transform: scale(1.03); }
+  .plan-card img { width: 100%; height: 180px; object-fit: cover; }
+  .plan-content { padding: 15px; text-align: center; }
+  .plan-title { font-size: 18px; font-weight: bold; margin-bottom: 8px; }
+  .plan-desc { font-size: 14px; color: #555; margin-bottom: 12px; }
+  .btn { display: inline-block; padding: 8px 14px; border: none; border-radius: 5px; text-decoration: none; color: white; font-size: 14px; }
+  .btn-success { background: #28a745; }
+  .btn-primary { background: #007bff; }
+</style>
+
+<h1 style="text-align:center;">All Yoga Plans</h1>
+<div class="plans-container">
+  {% for plan in plans %}
+  <div class="plan-card">
+    <img src="{{ plan.image_url }}" alt="{{ plan.title }}">
+    <div class="plan-content">
+      <div class="plan-title">{{ plan.title }}</div>
+      <div class="plan-desc">{{ plan.description|truncatewords:15 }}</div>
+      {% if plan.plan_type == 'Free' %}
+        <a href="{% url 'plan_detail' plan.id %}" class="btn btn-success">View Plan</a>
+      {% else %}
+        <a href="{% url 'subscribe_plan' plan.id %}" class="btn btn-primary">
+          Subscribe ₹{{ plan.price }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+  {% empty %}
+  <p>No plans available right now.</p>
+  {% endfor %}
+</div>
+{% endblock %}

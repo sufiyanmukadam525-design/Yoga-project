@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}Admin Dashboard{% endblock %}
+{% blockcontent%}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+        }
+        .header {
+            background-color: #1e3a8a;
+            padding: 15px;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .card h2 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+        .card p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .logout-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: crimson;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .logout-btn:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Admin Dashboard</h1>
+    <a class="logout-btn" href="{% url 'logout' %}">Logout</a>
+</div>
+
+<div class="container">
+    <div class="card">
+        <h2>Total Users</h2>
+        <p>{{ total_users }}</p>
+    </div>
+    <div class="card">
+        <h2>Active Subscribers</h2>
+        <p>{{ active_subscribers }}</p>
+    </div>
+    <div class="card">
+        <h2>Pending Payments</h2>
+        <p>{{ pending_payments }}</p>
+    </div>
+    <div class="card">
+        <h2>Total Sessions</h2>
+        <p>{{ total_sessions }}</p>
+    </div>
+</div>
+
+</body>
+</html>
+{% endblock %}

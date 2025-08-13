@@ -1,0 +1,154 @@
+{% extends 'yogaapp/base.html' %}
+{% block title %}Logged Out{% endblock %}
+
+{% block content %}
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #f0f9f8, #dff2e8);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 400px;
+      width: 100%;
+      background-color: #ffffff;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 24px;
+      color: #2c3e50;
+      margin-bottom: 8px;
+    }
+
+    .subtext {
+      font-size: 14px;
+      color: #7f8c8d;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #34495e;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #dcdde1;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #2ecc71;
+      box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #2ecc71;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #27ae60;
+    }
+
+    .login-link {
+      margin-top: 14px;
+      font-size: 13px;
+    }
+
+    .login-link a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    .message-container {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+    }
+
+    .popup-message {
+      padding: 15px 30px;
+      background-color: #2ecc71;
+      color: white;
+      font-weight: bold;
+      border-radius: 8px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      margin-bottom: 10px;
+      text-align: center;
+      min-width: 280px;
+      animation: fadeOut 5s forwards;
+    }
+
+    .popup-message.error {
+      background-color: #e74c3c;
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  {% if messages %}
+    <div class="message-container">
+      {% for message in messages %}
+        <div class="popup-message {{ message.tags }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="container">
+    <h2>Create Account</h2>
+    <p class="subtext">Join our wellness community 💫</p>
+    <form method="post">
+      {% csrf_token %}
+        {{ form.username.label_tag }} {{ form.username }}
+        {{ form.email.label_tag }} {{ form.email }}
+        {{ form.password.label_tag }} {{ form.password }}
+        {{ form.confirm_password.label_tag }} {{ form.confirm_password }}
+        {{ form.admin_code.label_tag }} {{ form.admin_code }}
+      <button type="submit">Sign Up</button>
+      <p class="login-link">Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+    </form>
+  </div>
+
+</body>
+</html>
+{% endblock %}

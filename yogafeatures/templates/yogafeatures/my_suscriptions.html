@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  .subs-container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+  .sub-item { border-bottom: 1px solid #ddd; padding: 10px 0; }
+  .sub-item:last-child { border-bottom: none; }
+  .active { color: green; font-weight: bold; }
+  .expired { color: red; font-weight: bold; }
+</style>
+
+<h1 style="text-align:center;">My Subscriptions</h1>
+<div class="subs-container">
+  {% for sub in subscriptions %}
+  <div class="sub-item">
+    <strong>{{ sub.plan.title }}</strong> - 
+    {% if sub.active %}
+      <span class="active">Active</span>
+    {% else %}
+      <span class="expired">Expired</span>
+    {% endif %}
+  </div>
+  {% empty %}
+  <p style="text-align:center;">You have no subscriptions yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

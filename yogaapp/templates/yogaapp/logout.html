@@ -1,0 +1,58 @@
+{% extends 'yogaapp/base.html' %}
+{% block title %}Logged Out{% endblock %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Logged Out</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f0f9f8, #e0f3ea);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .box {
+      text-align: center;
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    }
+    .box h2 {
+      color: #2c3e50;
+      margin-bottom: 12px;
+    }
+    .box p {
+      color: #7f8c8d;
+    }
+    .box a {
+      display: inline-block;
+      margin-top: 20px;
+      background-color: #2ecc71;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .box a:hover {
+      background-color: #27ae60;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>You have been logged out.</h2>
+    <p>Thank you for visiting. Come back soon! 🌿</p>
+    <a href="{% url 'login' %}">Login Again</a>
+  </div>
+</body>
+</html>
+
+{% endblock %}
